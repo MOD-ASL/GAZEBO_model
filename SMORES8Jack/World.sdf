@@ -1,12 +1,12 @@
 <?xml version ='1.0'?>
-<sdf version ='1.4'>
+<sdf version ='1.5'>
   <world name='default'>
-	<physics type = "ode">
+  <physics type = "ode">
       <ode>
-		<constraints>
-			<cfm>0.005</cfm>
-      <erp>0.4</erp>
-		</constraints>
+        <constraints>
+          <cfm>0.005</cfm>
+          <erp>0.4</erp>
+        </constraints>
       </ode>
     </physics>
     <include>
@@ -202,6 +202,58 @@
       </link>
       <pose>0 -1 0 0 -0 0</pose>
     </model>
+
+    <model name='surface'>
+      <pose>0 -0.5 -0.2 0 -0 0</pose>
+      <!--static>1</static-->
+      <link name='link'>
+        <collision name='surface'>
+          <pose>0 0 0.3 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.24 0.009</size>
+            </box>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.6</mu>
+                <mu2>0.6</mu2>
+              </ode>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual1'>
+          <pose>0 0 0.3 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.45 0.24 0.009</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Wood</name>
+            </script>
+          </material>
+        </visual>
+        <velocity_decay>
+          <linear>0</linear>
+          <angular>0</angular>
+        </velocity_decay>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose>0 -0.5 -0.2 0 -0 0</pose>
+    </model>
+
+
     <model name='table_tall'>
       <pose>0.00285 -1.33737 0 0 -0 0</pose>
       <!--static>1</static-->
@@ -509,7 +561,7 @@
       </link>
       <pose>0 -2.40079 0 0 -0 0</pose>
     </model>
-    
-    <plugin filename="plugins/libGaitRecorder.so" name="ControlCenter"/>
+
+    <plugin filename="plugins/libWorldController.so" name="ControlCenter"/>
   </world>
 </sdf>
