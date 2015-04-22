@@ -3,8 +3,11 @@
   <world name='default'>
   <physics type = "ode">
       <ode>
+        <!--solver>
+          <iters>500</iters> <!-- This will make sliding disappear, but decrease the simulation speed-->
+        </solver-->
         <constraints>
-          <cfm>0.005</cfm>
+          <cfm>0.005</cfm> <!-- Change this to a smaller value will make bodys more rigid, but will increase the sliding-->
           <erp>0.4</erp>
         </constraints>
       </ode>
